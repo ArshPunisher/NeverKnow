@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #171717;
+}
+
