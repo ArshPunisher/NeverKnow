@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import Image, { StaticImageData } from "next/image"; // Explicitly import StaticImageData
+import Image, { StaticImageData } from "next/image"; 
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 
 interface CarouselProps {
-  images: (string | StaticImageData)[]; // Accept both string paths and StaticImageData types
+  images: (string | StaticImageData)[]; 
 }
 
 const Carousel = ({ images }: CarouselProps) => {
@@ -26,7 +25,7 @@ const Carousel = ({ images }: CarouselProps) => {
   };
 
   return (
-    <div className="relative w-full h-[500px] overflow-hidden">
+    <div className="relative w-full h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden">
       {images.map((src, index) => (
         <div
           key={index}
@@ -39,32 +38,34 @@ const Carousel = ({ images }: CarouselProps) => {
             alt={`Carousel Image ${index + 1}`}
             layout="fill"
             objectFit="cover"
-            className="w-full h-full"
+            priority
           />
         </div>
       ))}
 
+      {/* Navigation Buttons */}
       <button
         onClick={handlePrevious}
-        className="absolute top-1/2 left-4 -translate-y-1/2 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100"
+        className="absolute top-1/2 left-4 -translate-y-1/2 p-1 md:p-2 bg-gray-700 bg-opacity-60 text-white rounded-full shadow-md hover:bg-gray-800 transition-all md:left-6 text-sm md:text-base"
       >
-        <MdArrowBackIosNew size={24} />
+        <MdArrowBackIosNew size={18} className="md:w-5 md:h-5" />
       </button>
 
       <button
         onClick={handleNext}
-        className="absolute top-1/2 right-4 -translate-y-1/2 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100"
+        className="absolute top-1/2 right-4 -translate-y-1/2 p-1 md:p-2 bg-gray-700 bg-opacity-60 text-white rounded-full shadow-md hover:bg-gray-800 transition-all md:right-6 text-sm md:text-base"
       >
-        <MdArrowForwardIos size={24} />
+        <MdArrowForwardIos size={18} className="md:w-5 md:h-5" />
       </button>
 
+      {/* Dots for Navigation */}
       <div className="absolute bottom-4 w-full flex justify-center space-x-2">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full ${
-              index === currentIndex ? "bg-white" : "bg-gray-300"
+              index === currentIndex ? "bg-white" : "bg-gray-400"
             }`}
           />
         ))}

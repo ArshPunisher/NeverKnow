@@ -8,6 +8,17 @@ const authApi = require('./routes/apiAuthRoutes')
 const apiRoutes = require('./routes/apiRoutes')
 const authMiddleware = require('./middlewares/authentication')
 const PORT = process.env.PORT
+const {createTables} = require('./db/schema')
+
+async function dbConfig() {
+    console.log("Starting database setup...");
+    await createTables(); // Call the function
+    console.log("Database setup complete.");
+}
+
+dbConfig().catch((error) => {
+    console.error("Error in database setup:", error);
+});
 
 app.use(express.json())
 app.use(cookieParser())

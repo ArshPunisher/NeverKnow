@@ -1,33 +1,98 @@
-import Link from 'next/link'
-import React from 'react'
-import Logo from '../Logo/page'
+// components/Navbar.tsx
+import Link from "next/link";
+import React, { useState } from "react";
+import Logo from "../Logo/page";
+import { FaRegUser, FaRegHeart } from "react-icons/fa";
+import { FiShoppingBag } from "react-icons/fi";
+import { FaBars } from "react-icons/fa6";
+import SearchBar from "../SearchBar/page";
+import ProfileModal from "../Modal/ProfileModal/page";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className='sticky top-0 w-full grid grid-cols-[1fr_3fr_1fr] bg-[#f4f4f4] p-6 z-50 drop-shadow-md'>
-      <div id='logo'>
-        <Logo/>
-      </div>
+    <nav className="sticky top-0 w-full bg-white p-3 md:p-5 z-50 drop-shadow-md">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          {/* Hamburger Icon for mobile */}
+          <FaBars
+            className="text-gray-700 hover:text-black cursor-pointer md:hidden"
+            size={24}
+            onClick={toggleMenu}
+          />
+          {/* Logo */}
+          <div id="logo" className="flex items-center">
+            <Logo />
+          </div>
+        </div>
 
-      <div className='flex items-center justify-center'>
-        <ul className='flex items-center justify-center space-x-5'>
-            <li className='cursor-pointer text-[#848484] text-[16px] font-normal hover:font-semibold hover:scale-105 transition-transform duration-200'>Products</li>
-            <li className='cursor-pointer text-[#848484] text-[16px] font-normal hover:font-semibold hover:scale-105 transition-transform duration-200'>Categories</li>
-            <li className='cursor-pointer text-[#848484] text-[16px] font-normal hover:font-semibold hover:scale-105 transition-transform duration-200'>Support</li>
-            <li className='cursor-pointer text-[#848484] text-[16px] font-normal hover:font-semibold hover:scale-105 transition-transform duration-200'>Contact</li>
-        </ul>
-      </div>
+        {/* Search Bar */}
+        <div className="hidden md:flex items-center w-full md:max-w-md lg:max-w-xl md:mx-4 lg:mx-auto">
+          <SearchBar />
+        </div>
 
-      <div className='flex items-center justify-center'>
-        <Link href='/login'>
-            <span className='text-[#ff8c00] hover:text-slate-600 text-[1.4rem] font-bold'>
-                Login
+        {/* Icons */}
+        <div className="flex items-center space-x-2 md:space-x-4 lg:space-x-8 lg:mr-8 relative">
+          <div
+            className="flex flex-col items-center cursor-pointer relative"
+            onClick={toggleModal}
+          >
+            <FaRegUser size={20} className="text-gray-700 hover:text-black" />
+            <span className="text-[0.6rem] md:text-sm text-gray-600">
+              Profile
             </span>
-        </Link>
+            {isModalOpen && <ProfileModal />}
+          </div>
+
+          <Link href="/wishlist">
+            <div className="flex flex-col items-center cursor-pointer">
+              <FaRegHeart
+                size={20}
+                className="text-gray-700 hover:text-black"
+              />
+              <span className="text-[0.6rem] md:text-sm text-gray-600">
+                Wishlist
+              </span>
+            </div>
+          </Link>
+
+          <Link href="/cart">
+            <div className="flex flex-col items-center cursor-pointer">
+              <FiShoppingBag
+                size={20}
+                className="text-gray-700 hover:text-black"
+              />
+              <span className="text-[0.6rem] md:text-sm text-gray-600">
+                Cart
+              </span>
+            </div>
+          </Link>
+        </div>
       </div>
 
-    </nav>
-  )
-}
+      {/* Search Bar for mobile view */}
+      <div className="mt-3 md:hidden">
+        <SearchBar />
+      </div>
 
-export default Navbar
+      {/* Mobile Menu (Optional) */}
+      {isMenuOpen && (
+        <div className="absolute left-0 top-full w-full bg-white shadow-md">
+          {/* Add menu items for mobile */}
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

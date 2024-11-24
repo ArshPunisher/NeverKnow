@@ -1,13 +1,23 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
 body {
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
   scroll-behavior: smooth;
   font-family: 'Poppins', sans-serif;
   background: #fff;
   color: #171717;
 }
 
+/* globals.css */
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

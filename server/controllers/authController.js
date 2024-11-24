@@ -6,7 +6,7 @@ exports.login = async (req, res) =>{
     try {
         const {username, password} = req.body;
         console.log(username, password)
-        const query = `SELECT * FROM users WHERE username = $1`
+        const query = `SELECT * FROM Users WHERE username = $1`
         const {rows} = await pool.query(query, [username])
 
         if(rows.length == 0){
@@ -41,14 +41,14 @@ exports.signup = async (req, res) => {
         if(!username || !email || !password){
             throw new Error("Bad Request")
         }
-        const checkUsernameExists = await pool.query(`SELECT * FROM users WHERE username = $1`,[username])
+        const checkUsernameExists = await pool.query(`SELECT * FROM Users WHERE username = $1`,[username])
         console.log(checkUsernameExists.rows)
         if(checkUsernameExists.rows.length > 0){
             throw new Error("This username is taken!")
         }
         const hashPassword = await bcrypt.hash(password, 12);
         const query = `
-        INSERT INTO users (username, email, password)
+        INSERT INTO Users (username, email, password)
         VALUES ($1, $2, $3) RETURNING *;
         `;
         const { rows } = await pool.query(query, [username, email, hashPassword]);
