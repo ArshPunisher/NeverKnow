@@ -1,5 +1,4 @@
 // components/Navbar.tsx
-import Link from "next/link";
 import React, { useState } from "react";
 import Logo from "../Logo/page";
 import { FaRegUser, FaRegHeart } from "react-icons/fa";
@@ -7,8 +6,12 @@ import { FiShoppingBag } from "react-icons/fi";
 import { FaBars } from "react-icons/fa6";
 import SearchBar from "../SearchBar/page";
 import ProfileModal from "../Modal/ProfileModal/page";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
+  // const {user} = useSelector((state: RootState)=> state.auth)
   const [isModalOpen, setModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -19,6 +22,7 @@ const Navbar: React.FC = () => {
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
+  // console.log("Navbr", user)
 
   return (
     <nav className="sticky top-0 w-full bg-white p-3 md:p-5 z-50 drop-shadow-md">
@@ -54,7 +58,7 @@ const Navbar: React.FC = () => {
             {isModalOpen && <ProfileModal />}
           </div>
 
-          <Link href="/wishlist">
+          <Link to="/wishlist">
             <div className="flex flex-col items-center cursor-pointer">
               <FaRegHeart
                 size={20}
@@ -66,7 +70,7 @@ const Navbar: React.FC = () => {
             </div>
           </Link>
 
-          <Link href="/cart">
+          <Link to="/cart">
             <div className="flex flex-col items-center cursor-pointer">
               <FiShoppingBag
                 size={20}

@@ -1,10 +1,10 @@
 import React from 'react'
 import ProductCard from '../ProductCard/page';
-import lipstick from '../../../../assets/images/nykaa/PinkLip.avif'
-import liquidLip from '../../../../assets/images/nykaa/liquidLipStick.avif'
-import lipGlos from '../../../../assets/images/nykaa/lipGlos.avif'
-import foundation from '../../../../assets/images/nykaa/foundation.avif'
-import Lqfoundation from '../../../../assets/images/nykaa/liquidFoundation.avif'
+import lipstick from '../../../assets/images/nykaa/PinkLip.avif'
+import liquidLip from '../../../assets/images/nykaa/liquidLipStick.avif'
+import lipGlos from '../../../assets/images/nykaa/lipGlos.avif'
+import foundation from '../../../assets/images/nykaa/foundation.avif'
+import Lqfoundation from '../../../assets/images/nykaa/liquidFoundation.avif'
 
 const products = [
     {

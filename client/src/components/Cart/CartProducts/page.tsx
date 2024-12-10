@@ -1,8 +1,5 @@
-"use client"
-
 import React, { useState } from 'react';
-import img from '../../../../assets/images/nykaa/cosmeticsKit.avif'
-import Image from 'next/image';
+import img from '../../../assets/images/nykaa/cosmeticsKit.avif'
 
 type CartProduct = {
   id: number;
@@ -47,7 +44,7 @@ const CartProducts = ({
               onChange={(e) => onToggleSelect(product.id, e.target.checked)}
             />
             {/* Product Image */}
-            <Image
+            <img
               src={img}
               alt={product.name}
               className="w-20 h-20 object-cover rounded"

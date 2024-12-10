@@ -1,6 +1,5 @@
 import React from "react";
-import img from '../../../../assets/images/nykaa/liquidFoundation.avif'
-import Image from "next/image";
+import img from '../../../assets/images/nykaa/liquidFoundation.avif'
 
 type WishlistCardProps = {
   product: {
@@ -18,7 +17,7 @@ const WishlistCard: React.FC<WishlistCardProps> = ({ product }) => {
     <div className="bg-white shadow-md rounded-lg overflow-hidden border flex flex-col">
       {/* Image Section */}
       <div className="relative">
-        <Image
+        <img
           src={img}
           alt={product.name}
           className="w-full h-64 object-cover"

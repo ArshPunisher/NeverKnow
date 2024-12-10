@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Image, { StaticImageData } from "next/image"; 
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 
 interface CarouselProps {
-  images: (string | StaticImageData)[]; 
+  images: string[];
 }
 
 const Carousel = ({ images }: CarouselProps) => {
@@ -17,7 +16,9 @@ const Carousel = ({ images }: CarouselProps) => {
   }, [images.length]);
 
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
   };
 
   const handleNext = () => {
@@ -33,12 +34,15 @@ const Carousel = ({ images }: CarouselProps) => {
             index === currentIndex ? "opacity-100" : "opacity-0"
           }`}
         >
-          <Image
-            src={src}
+          <img
+            src={src} 
             alt={`Carousel Image ${index + 1}`}
-            layout="fill"
-            objectFit="cover"
-            priority
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+            loading="eager"
           />
         </div>
       ))}

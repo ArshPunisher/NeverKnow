@@ -1,10 +1,12 @@
-"use client";
-
-import InputField from "@/components/InputField/page";
-import Link from "next/link";
+import InputField from "../../InputField/page";
+import { authState } from "../../../redux/authSlice";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
+  const dispatch = useDispatch()
+
   // Loading State
   const [loading, setLoading] = useState(false);
 
@@ -72,6 +74,7 @@ const LoginForm = () => {
         throw new Error(data.message || "An error occurred during login");
       }
       alert("Login successful");
+      
     } catch (error: any) {
       console.log("Error occurred", error.message);
       alert(error.message || "An unexpected error occurred.");
@@ -94,7 +97,7 @@ const LoginForm = () => {
     <p className="text-center text-gray-400 text-sm">
         Don't have an account?{" "}
         <Link
-        href={"/signup"}
+        to={"/auth/signup"}
         className="hover:text-white hover:underline cursor-pointer"
         >
         SignUp

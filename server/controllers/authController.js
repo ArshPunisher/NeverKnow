@@ -28,12 +28,11 @@ exports.login = async (req, res) =>{
         })
 
         // Successfully logged in
-        res.status(200).json({ error: false, message: "Login successful", user: { id: user.id, username: user.username, email: user.email } });
+        res.status(200).json({ error: false, message: "Login successful", token: token });
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
-
 
 exports.signup = async (req, res) => {
     try {
@@ -62,7 +61,12 @@ exports.signup = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
         });
 
-        res.status(201).json({ error: false, message: 'Signup successful' });
+        // Send the response
+        res.status(201).json({
+            error: false,
+            message: 'Signup successful',
+            token: token,
+        });
     } catch (error) {
         res.status(400).json({ error: true, message: error.message });
     }

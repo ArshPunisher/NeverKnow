@@ -1,10 +1,9 @@
-import Image, { StaticImageData } from "next/image";
 import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useSwipeable } from "react-swipeable";
 
 interface Product {
-  image: string | StaticImageData;
+  image: string;
   name: string;
   mrp: number;
   discount?: number;
@@ -67,7 +66,7 @@ const ProductCard = ({ products }: ProductCardProps) => {
         {products.map((product, index) => (
           <div key={index} className="p-2">
             <div className="card w-[8rem] md:w-[14rem] cursor-pointer">
-              <Image src={product.image} className="card-img-top" alt="..." />
+              <img src={product.image} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h2 className="text-xs font-semibold mt-2 md:text-sm line-clamp overflow-hidden">
                   {product.name}

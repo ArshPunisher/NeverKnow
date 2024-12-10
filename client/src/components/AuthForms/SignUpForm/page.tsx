@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   isPasswordContainCapitalChar,
   isPasswordContainNumber,
@@ -7,12 +6,14 @@ import {
   isValidEmail,
   isValidPassword,
   isValidUsername,
-} from "@/utils/Utils";
-import InputField from "@/components/InputField/page";
-import Link from "next/link";
+} from "../../../utils/Utils";
+import InputField from "../../InputField/page";
+import {authState} from '../../../redux/authSlice'
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const SignUpForm = () => {
-  const router = useRouter();
+  const dispatch = useDispatch()
 
   const [user, setUser] = useState({
     username: "",
@@ -79,8 +80,9 @@ const SignUpForm = () => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Signup failed");
 
+      dispatch(authState(data.user))
+      
       alert("Sign up successfully!");
-      router.push("/login");
     } catch (error: any) {
       alert(error.message || "An unexpected error occurred.");
     } finally {
@@ -104,7 +106,7 @@ const SignUpForm = () => {
       <p className="text-center text-gray-400 text-sm">
         Already have an account?{" "}
         <Link
-          href={"/login"}
+          to={"/auth/login"}
           className="hover:text-white hover:underline cursor-pointer"
         >
           Login
